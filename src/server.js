@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
+import { connectMongoDb } from "./config/mongodb.js";
 import { limiter } from "./middlewares/rateLimit.js";
 
 const app = express()
@@ -27,6 +28,8 @@ app.get('/', (req, res) => {
 })
 
 const PORT = 8888;
+
+await connectMongoDb();
 
 app.listen(PORT, () => {
   console.log(`Server running on PORT: ${PORT}`)
